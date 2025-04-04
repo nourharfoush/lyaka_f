@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="form-container">
+    <h3 class="form-title">تعديل بيانات الطالب</h3>
+    
+    <form method="POST" action="{{ url_for('edit_student', student_id=student.id) }}">
+        <!-- بيانات الطالب الأساسية -->
+        <div class="form-section">
+            <h5 class="form-section-title"><i class="fas fa-user"></i> البيانات الشخصية</h5>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="code" class="required-field">كود الطالب</label>
+                    <input type="text" class="form-control" id="code" name="code" value="{{ student.code }}" required>
+                    <div class="valid-feedback">تم إدخال الكود بشكل صحيح</div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="name" class="required-field">اسم الطالب</label>
+                    <input type="text" class="form-control" id="name" name="name" value="{{ student.name }}" required>
+                    <div class="valid-feedback">تم إدخال الاسم بشكل صحيح</div>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="national_id" class="required-field">الرقم القومي</label>
+                    <input type="text" class="form-control" id="national_id" name="national_id" value="{{ student.national_id }}" required pattern="[0-9]{14}" maxlength="14">
+                    <div class="invalid-feedback">الرقم القومي يجب أن يتكون من 14 رقم</div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="stage" class="required-field">المرحلة التعليمية</label>
+                    <select class="form-control" id="stage" name="stage" required>
+                        <option value="">اختر المرحلة...</option>
+                        <option value="primary" {% if student.stage == 'primary' %}selected{% endif %}>المرحلة الابتدائية</option>
+                        <option value="preparatory" {% if student.stage == 'preparatory' %}selected{% endif %}>المرحلة الإعدادية</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <!-- بيانات المدرسة -->
+        <div class="form-section">
+            <h5 class="form-section-title"><i class="fas fa-school"></i> بيانات المدرسة</h5>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="region" class="required-field">المنطقة الأزهرية</label>
+                    <select class="form-control" id="region" name="region" required>
+                        <option value="">اختر المنطقة...</option>
+                        {% for region in regions %}
+                            <option value="{{ region.id }}" {% if region.id == student.region_id %}selected{% endif %}>{{ region.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="administration" class="required-field">الإدارة</label>
+                    <input type="text" class="form-control" id="administration" name="administration" value="{{ student.administration }}" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="institute" class="required-field">المعهد</label>
+                    <select class="form-control" id="institute" name="institute" required>
+                        <option value="">اختر المعهد...</option>
+                        {% for institute in institutes %}
+                            <option value="{{ institute.id }}" {% if institute.id == student.institute_id %}selected{% endif %}>{{ institute.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-buttons">
+            <button type="submit" class="btn btn-form-submit"><i class="fas fa-save"></i> حفظ التعديلات</button>
+            <a href="{{ url_for('view_student', student_id=student.id) }}" class="btn btn-form-cancel"><i class="fas fa-times"></i> إلغاء</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

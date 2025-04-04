@@ -1,0 +1,48 @@
+/* ملف CSS للتأثيرات والحركات */
+
+/* تأثير ظهور العناصر */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* تأثير نبض للأزرار */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.btn-primary:active {
+    animation: pulse 0.3s ease-in-out;
+}
+
+/* تأثير تحميل البيانات */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top-color: #0056b3;
+    animation: spin 1s ease-in-out infinite;
+}
+
+/* تأثير تلاشي للتنبيهات */
+.alert {
+    animation: fadeIn 0.3s ease-in-out;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.alert.fade-out {
+    opacity: 0;
+}

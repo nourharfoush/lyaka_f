@@ -1,0 +1,278 @@
+/* تنسيقات خاصة بصفحات التقارير */
+
+/* تنسيق ديباجة التقرير */
+.report-header {
+    border-bottom: 2px solid #006633;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.report-title {
+    background-color: #f8f9fa;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.report-info-table {
+    width: 70%;
+    margin: 0 auto;
+    border: 1px solid #dee2e6;
+    border-collapse: collapse;
+}
+
+.report-info-table th {
+    background-color: #006633;
+    color: #ffffff;
+    text-align: center;
+    vertical-align: middle;
+    padding: 8px 5px;
+    font-weight: bold;
+    border: 1px solid #dee2e6;
+}
+
+.report-info-table td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 8px 5px;
+    border: 1px solid #dee2e6;
+}
+
+/* تنسيق جدول الطلاب */
+.students-table {
+    border: 1px solid #dee2e6;
+}
+
+.students-table th {
+    background-color: #006633;
+    color: #ffffff;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 0.9rem;
+    padding: 8px 5px;
+    /* جعل جميع رؤوس الأعمدة عمودية */
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    min-height: 150px;
+    white-space: nowrap;
+    width: 40px;
+}
+
+/* تنسيق العناوين العمودية */
+.vertical-header {
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    min-height: 150px;
+    text-align: center;
+    vertical-align: middle;
+    white-space: nowrap;
+    padding: 8px 2px;
+    width: 40px; /* إضافة عرض ثابت للعناوين */
+}
+
+.students-table th {
+    font-size: 0.85rem;
+    font-weight: bold;
+}
+
+/* Make the table more compact for reports with many columns */
+.students-table {
+    font-size: 0.9rem;
+}
+
+.students-table td {
+    text-align: center;
+    vertical-align: middle;
+    font-size: 0.9rem;
+    padding: 8px 5px;
+}
+
+/* تنسيق شعار الأزهر */
+.azhar-logo {
+    max-height: 120px;
+    margin-bottom: 10px;
+}
+
+/* تنسيق معلومات الجهة */
+.organization-info h5, .organization-info h6 {
+    margin-bottom: 5px;
+    color: #006633;
+}
+
+/* تنسيقات خاصة بالطباعة */
+@media print {
+    @page {
+        size: A4 landscape; /* تحديد مقاس A4 بالعرض */
+        margin: 0.5cm; /* هوامش متساوية من جميع الجهات */
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    
+    /* تنسيق جدول معلومات المنطقة عند الطباعة */
+    .report-info-table {
+        width: 70%;
+        margin: 0 auto;
+        border-collapse: collapse;
+        border: 2px solid #000;
+    }
+    
+    .report-info-table th {
+        background-color: #f0f0f0 !important;
+        color: #000 !important;
+        font-weight: bold;
+        text-align: center;
+        vertical-align: middle;
+        padding: 8px 5px;
+        border: 2px solid #000;
+    }
+    
+    .report-info-table td {
+        color: #000 !important;
+        font-weight: bold;
+        text-align: center;
+        vertical-align: middle;
+        padding: 8px 5px;
+        border: 2px solid #000;
+    }
+    
+    body {
+        font-size: 10pt; /* تصغير حجم الخط قليلاً ليناسب العرض */
+        background-color: white;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .container-fluid, .container {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+    
+    .navbar, .footer, .btn-print, .btn:not(.btn-print), .no-print {
+        display: none !important;
+    }
+    
+    .card {
+        border: none;
+        box-shadow: none;
+        margin: 0;
+        padding: 0;
+    }
+    
+    .card-header {
+        background-color: white !important;
+        color: black !important;
+        border-bottom: 2px solid #006633;
+        padding: 5px 0;
+    }
+    
+    .card-body {
+        padding: 0.5cm 0;
+    }
+    
+    .students-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        font-size: 9pt; /* تصغير حجم خط الجدول */
+        table-layout: fixed; /* تثبيت عرض الجدول */
+        border: 2px solid #000; /* إضافة حدود للجدول بالكامل مع زيادة السمك */
+    }
+    
+    .students-table th {
+        background-color: #f0f0f0 !important;
+        color: black !important;
+        border: 2px solid #000;
+        padding: 3px 2px; /* تقليل التباعد الداخلي */
+        font-size: 9pt;
+        word-wrap: break-word; /* السماح بكسر الكلمات الطويلة */
+        /* جعل جميع رؤوس الأعمدة عمودية عند الطباعة */
+        writing-mode: vertical-lr;
+        transform: rotate(180deg);
+        white-space: nowrap;
+        min-height: 80px;
+        max-width: 25px;
+        text-align: center;
+    }
+    
+    /* تحديد عرض أعمدة محددة */
+    .students-table th:nth-child(2), /* عمود الاسم */
+    .students-table td:nth-child(2) {
+        min-width: 120px !important;
+        max-width: 120px !important;
+    }
+    
+    .students-table th:nth-child(3), /* عمود المنطقة */
+    .students-table td:nth-child(3) {
+        min-width: 80px !important;
+        max-width: 80px !important;
+    }
+    
+    .students-table th:nth-child(4), /* عمود المعهد */
+    .students-table td:nth-child(4) {
+        min-width: 80px !important;
+        max-width: 80px !important;
+    }
+    
+    /* تصغير عرض باقي الأعمدة */
+    .students-table th:not(:nth-child(2)):not(:nth-child(3)):not(:nth-child(4)),
+    .students-table td:not(:nth-child(2)):not(:nth-child(3)):not(:nth-child(4)) {
+        max-width: 20px !important;
+    }
+    
+    /* تنسيق العناوين العمودية عند الطباعة */
+    .vertical-header {
+        writing-mode: vertical-lr;
+        transform: rotate(180deg); /* تغيير الدوران ليكون من أعلى إلى أسفل */
+        white-space: nowrap;
+        min-height: 80px; /* تقليل الارتفاع عند الطباعة */
+        max-width: 25px; /* زيادة العرض قليلاً عند الطباعة */
+        padding: 2px 1px;
+        text-align: center;
+        border: 2px solid #000; /* تأكيد على حدود العناوين العمودية مع زيادة السمك */
+    }
+    
+    .students-table td {
+        border: 2px solid #000;
+        padding: 3px 2px; /* تقليل التباعد الداخلي */
+        font-size: 9pt;
+        word-wrap: break-word; /* السماح بكسر الكلمات الطويلة */
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    
+    .print-header {
+        display: block !important;
+        margin-bottom: 10px;
+        position: relative; /* إضافة موضع نسبي للعنصر الأب */
+    }
+    
+    .print-header img {
+        max-height: 80px; /* زيادة حجم الشعار قليلاً */
+        position: absolute; /* تحديد موضع مطلق للشعار */
+        left: 0; /* وضع الشعار في أقصى اليسار */
+        top: 0; /* وضع الشعار في أعلى الصفحة */
+        z-index: 100; /* ضمان ظهور الشعار فوق العناصر الأخرى */
+        margin-left: 10px; /* إضافة هامش من اليسار */
+    }
+    
+    .print-header h4 {
+        margin: 3px 0;
+        color: #006633;
+        font-size: 12pt;
+    }
+    
+    .print-header h3 {
+        font-size: 14pt;
+    }
+    
+    .print-footer {
+        display: block !important;
+        margin-top: 10px;
+        text-align: center;
+        font-size: 8pt;
+        color: #666;
+    }
+}
