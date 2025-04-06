@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>  المشروع القومى للياقة البدنية بالازهر الشريف  </title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <!-- Add SheetJS library for Excel functionality -->
+    <script src="https://cdn.sheetjs.com/xlsx-0.19.3/package/dist/xlsx.full.min.js"></script>
+    <!-- Add LZString library for data compression -->
+    <script src="https://cdn.jsdelivr.net/npm/lz-string@1.4.4/libs/lz-string.min.js"></script>
+    <!-- Add searchStudentByCode.js for improved search functionality -->
+    <script src="searchStudentByCode.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <header class="text-center my-4">
+            <h1> المشروع القومى للياقة البدنية بالازهر الشريف <span class="year-badge" id="yearBadge">"فتيات"</span></h1>
+            <p class="text-muted">برمجة انور حسن حرفوش 01064620018</p>
+        </header>
+
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h2 class="card-title">إدخال بيانات الطالب</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-8">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" id="searchCode" placeholder="ابحث بالكود...">
+                                    <button class="btn btn-outline-primary" type="button" id="searchButton">بحث</button>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="btn-group w-100" role="group">
+                                    <button type="button" class="btn btn-outline-secondary" id="firstButton">الأول</button>
+                                    <button type="button" class="btn btn-outline-secondary" id="prevButton">السابق</button>
+                                    <button type="button" class="btn btn-outline-secondary" id="nextButton">التالي</button>
+                                    <button type="button" class="btn btn-outline-secondary" id="lastButton">الأخير</button>
+                                </div>
+                                <div class="text-center mt-2">
+                                    <small id="positionIndicator" class="text-muted">0 / 0</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-success w-100" onclick="addNewStudent()">
+                                    <i class="fas fa-plus"></i> إضافة طالب جديد
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-danger w-100" onclick="deleteStudent()">
+                                    <i class="fas fa-trash"></i> حذف الطالب الحالي
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-dark w-100" onclick="deleteAllStudents()">
+                                    <i class="fas fa-trash"></i> حذف الكل
+                                </button>
+                            </div>
+                        </div>
+                        <form id="studentForm">
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label for="studentCode" class="form-label">الكود</label>
+                                    <input type="text" class="form-control" id="studentCode" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="studentName" class="form-label">الاسم</label>
+                                    <input type="text" class="form-control" id="studentName" required>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="nationalId" class="form-label">الرقم القومي</label>
+                                    <input type="text" class="form-control" id="nationalId" required>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-md-3">
+                                    <label for="region" class="form-label">المنطقة</label>
+                                    <input type="text" class="form-control" id="region" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="administration" class="form-label">الإدارة</label>
+                                    <input type="text" class="form-control" id="administration" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="institute" class="form-label">المعهد</label>
+                                    <input type="text" class="form-control" id="institute" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="testYear" class="form-label">سنة الاختبار</label>
+                                    <select class="form-select" id="testYear" required>
+                                        <option value="" selected disabled>اختر السنة</option>
+                                        <option value="2023">2023</option>
+                                        <option value="2024">2024</option>
+                                        <option value="2025">2025</option>
+                                        <option value="2026">2026</option>
+                                        <option value="2027">2027</option>
+                                        <option value="2028">2028</option>
+                                        <option value="2029">2029</option>
+                                        <option value="2030">2030</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="educationLevel" class="form-label">المرحلة التعليمية</label>
+                                    <select class="form-select" id="educationLevel" required>
+                                        <option value="" selected disabled>اختر المرحلة</option>
+                                        <option value="primary">ابتدائي</option>
+                                        <option value="middle">إعدادي</option>
+                                        <option value="high">ثانوي</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="row mt-4">
+                            <div class="col-12 text-center">
+                                <button type="button" id="saveButton" class="btn btn-primary btn-lg mx-2">حفظ البيانات</button>
+                                <button type="button" id="updateButton" class="btn btn-warning btn-lg mx-2">تحديث البيانات</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-success text-white">
+                        <h2 class="card-title">نتائج الاختبارات</h2>
+                    </div>
+                    <div class="card-body">
+                        <div id="testsContainer">
+                            <!-- Tests will be dynamically loaded based on education level -->
+                            <div class="alert alert-info">الرجاء اختيار المرحلة التعليمية أولاً</div>
+                        </div>
+                        
+                        <div class="row mt-4">
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-header bg-info text-white">المجموع الكلي</div>
+                                    <div class="card-body">
+                                        <h3 id="totalScore">0</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-header bg-info text-white">مجموع متوسطات الاختبارات الأساسية</div>
+                                    <div class="card-body">
+                                        <h3 id="coreTestsScore">0</h3>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="card">
+                                    <div class="card-header bg-info text-white">الترتيب</div>
+                                    <div class="card-body">
+                                        <h3 id="ranking">-</h3>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row mt-4">
+                            <div class="col-12 text-center">
+                                <button type="button" id="saveButton" class="btn btn-primary btn-lg">حفظ البيانات</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-warning text-dark">
+                        <h2 class="card-title">الإجراءات</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-primary btn-lg w-100 mb-2" id="saveButtonAlt">
+                                    <i class="bi bi-save"></i> حفظ البيانات
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-warning btn-lg w-100 mb-2" id="updateButtonAlt">
+                                    <i class="bi bi-pencil"></i> تحديث البيانات
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-danger btn-lg w-100 mb-2" id="clearButton">
+                                    <i class="bi bi-trash"></i> مسح النموذج
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Database Backup/Restore Buttons -->
+                        <div class="row mt-3">
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-info btn-lg w-100 mb-2" id="exportDatabaseBtn">
+                                    <i class="bi bi-download"></i> تصدير البيانات
+                                </button>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="input-group mb-2">
+                                    <input type="file" class="form-control" id="databaseFileInput" accept=".json">
+                                    <button type="button" class="btn btn-info" id="importDatabaseBtn">
+                                        استيراد البيانات
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" class="btn btn-secondary btn-lg w-100 mb-2" id="restoreBackupBtn">
+                                    <i class="bi bi-arrow-clockwise"></i> استعادة النسخة الاحتياطية
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Excel Export/Import Buttons -->
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <button type="button" class="btn btn-success btn-lg w-100 mb-2" id="exportExcelBtn">
+                                    <i class="bi bi-file-excel"></i> تصدير نموذج إكسل
+                                </button>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input-group mb-2">
+                                    <input type="file" class="form-control" id="excelFileInput" accept=".xlsx">
+                                    <button type="button" class="btn btn-success" id="importExcelBtn">
+                                        استيراد من إكسل
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header bg-warning text-dark">
+                        <h2 class="card-title">التقارير <span class="year-badge" id="reportYearBadge">2025</span></h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label for="reportYear" class="form-label">اختر سنة التقارير</label>
+                                <select class="form-select" id="reportYear">
+                                    <option value="2023">2023</option>
+                                    <option value="2024">2024</option>
+                                    <option value="2025">2025</option>
+                                    <option value="2026">2026</option>
+                                    <option value="2027">2027</option>
+                                    <option value="2028">2028</option>
+                                    <option value="2029">2029</option>
+                                    <option value="2030">2030</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button type="button" id="regionReportBtn" class="btn btn-outline-primary w-100 mb-2">تقرير المناطق</button>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" id="topStudentsBtn" class="btn btn-outline-success w-100 mb-2">أفضل 10 طلاب</button>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="button" id="printReportBtn" class="btn btn-outline-dark w-100 mb-2">طباعة التقارير</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reports Modal -->
+        <div class="modal fade" id="reportsModal" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="reportsModalTitle">التقارير</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="reportsModalBody">
+                        <!-- Report content will be loaded here -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">إغلاق</button>
+                        <button type="button" class="btn btn-primary" id="printModalBtn">طباعة</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="database.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

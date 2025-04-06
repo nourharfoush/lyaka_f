@@ -1,0 +1,314 @@
+/* Main Styles for Fitness Test Data System */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.card {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.card-header {
+    font-weight: bold;
+    padding: 12px 20px;
+}
+
+.card-title {
+    margin-bottom: 0;
+    font-size: 1.5rem;
+}
+
+/* Test result tables */
+.test-table {
+    margin-bottom: 25px;
+}
+
+.test-table th {
+    background-color: #e9ecef;
+}
+
+/* Score displays */
+#totalScore, #coreTestsScore, #ranking {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    color: #0d6efd;
+}
+
+/* Print styles */
+@media print {
+    .no-print {
+        display: none;
+    }
+    
+    .container {
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .card {
+        border: 1px solid #ddd;
+        box-shadow: none;
+    }
+
+    /* تنسيقات الديباجة */
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #000;
+        padding-bottom: 15px;
+        width: 100%;
+        background-color: white;
+        /* تأكيد ظهور الديباجة في كل صفحة */
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        page-break-inside: avoid;
+        page-break-before: auto;
+        page-break-after: auto;
+        height: 120px;
+    }
+
+    .azhar-logo {
+        width: 80px;
+        height: 80px;
+    }
+
+    .azhar-info {
+        text-align: right;
+        line-height: 1.6;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    @page {
+        size: landscape;
+        margin: 1.5cm 1cm;
+        margin-top: 180px;
+        margin-bottom: 50px;
+    }
+
+    .page-header-space {
+        height: 100px;
+    }
+
+    .page-footer {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        border-top: 1px solid #000;
+    }
+
+    .page-footer-space {
+        height: 50px;
+    }
+
+    .content-wrapper {
+        margin-top: 180px;
+        margin-bottom: 50px;
+        page-break-before: auto;
+        clear: both;
+    }
+
+    .page {
+        page-break-after: always;
+    }
+
+    .page:last-child {
+        page-break-after: avoid;
+    }
+    
+    /* Make table text smaller to fit more data */
+    .report-table th, .report-table td {
+        padding: 4px;
+        font-size: 11px;
+    }
+
+    /* Ensure header appears on every page */
+    thead {
+        display: table-header-group;
+        margin-top: 150px;
+    }
+
+    tfoot {
+        display: table-footer-group;
+    }
+    
+    /* إضافة مساحة بين الديباجة والجدول */
+    table {
+        margin-top: 30px;
+    }
+    
+    /* تأكيد ظهور الديباجة في كل صفحة مطبوعة */
+    .page-header {
+        display: table-header-group;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        position: running(header);
+        margin-bottom: 40px;
+        height: auto;
+        page-break-after: avoid;
+    }
+    
+    @page {
+        @top-center {
+            content: element(header);
+        }
+    }
+
+}
+
+/* Custom form styling */
+.form-control:focus, .form-select:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Button styling */
+.btn {
+    border-radius: 5px;
+    padding: 8px 16px;
+    transition: all 0.3s;
+}
+
+.btn-lg {
+    padding: 12px 24px;
+    font-size: 1.1rem;
+}
+
+/* Modal styling */
+.modal-content {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.modal-header {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.modal-footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #dee2e6;
+}
+
+/* Report tables */
+.report-table {
+    width: 100%;
+    margin-bottom: 1rem;
+    border-collapse: collapse;
+}
+
+/* تنسيقات خاصة لتقارير المناطق وأفضل 10 طلاب بشكل عرضي */
+.region-report-page, .individual-report-page {
+    width: 100%;
+    overflow-x: auto;
+    page-break-after: always;
+}
+
+/* تنسيقات خاصة للطباعة العرضية لتقارير المناطق وأفضل 10 طلاب */
+@media print {
+    .region-report-page, .individual-report-page {
+        width: 100%;
+        overflow: visible;
+        page-break-after: always;
+    }
+}
+
+.report-table th, .report-table td {
+    padding: 0.5rem;
+    border: 1px solid #dee2e6;
+    font-size: 0.9rem;
+}
+
+.report-table th {
+    background-color: #e9ecef;
+    font-weight: bold;
+    text-align: center;
+}
+
+.report-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.report-table tr:hover {
+    background-color: #e9ecef;
+}
+
+/* تنسيق أعمدة الجداول - تصغير أعمدة الدرجات والمتوسطات وتكبير أعمدة البيانات الشخصية */
+.report-table th:nth-child(n+4):nth-child(-n+8), 
+.report-table td:nth-child(n+4):nth-child(-n+8) {
+    width: 8%;
+    max-width: 80px;
+    white-space: nowrap;
+}
+
+/* تكبير عمود الاسم */
+.report-table th:nth-child(2), 
+.report-table td:nth-child(2) {
+    width: 20%;
+    min-width: 180px;
+}
+
+/* تكبير عمود المنطقة */
+.report-table th:nth-child(3), 
+.report-table td:nth-child(3) {
+    width: 15%;
+    min-width: 140px;
+}
+
+/* تكبير عمود المعهد */
+.report-table th:nth-child(9), 
+.report-table td:nth-child(9) {
+    width: 18%;
+    min-width: 160px;
+}
+
+/* Add styling for the year badge */
+.year-badge {
+    display: inline-block;
+    background-color: #ff5722;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    margin-right: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Make the header more prominent */
+header h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+/* Add styling for report headers */
+.modal-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .year-badge {
+        font-size: 1rem;
+        padding: 3px 10px;
+    }
+}
+@media (max-width: 768px) {
+    .card-title {
+        font-size: 1.2rem;
+    }
+    
+    #totalScore, #coreTestsScore, #ranking {
+        font-size: 1.5rem;
+    }
+}
